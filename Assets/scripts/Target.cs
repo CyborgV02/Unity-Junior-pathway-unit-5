@@ -9,17 +9,23 @@ public class Target : MonoBehaviour
     float spawnRangeX=4.0f;
     float spawnPosY=-2.0f;
     private Rigidbody targetRB;
+    private GameManager gameManager;
+    public int pointValue;
+    public ParticleSystem explosionParticle;
     void Start()
     {
         targetRB=GetComponent<Rigidbody>();
-
         targetRB.AddForce(randomForce(),ForceMode.Impulse);
         targetRB.AddTorque(randomTorque(),randomTorque(),randomTorque(),ForceMode.Impulse);
         transform.position=(randomSpawnPos());
+        gameManager=GameObject.Find("GameManager").GetComponent<GameManager>();
+        
     }
     void OnMouseDown()
     {
-        Destroy(gameObject);
+        gameManager.updateScore(pointValue);
+        Instantiate(explosionParticle,transform.position,explosionParticle.transform.rotation);
+         Destroy(gameObject);
     }
     void Update()
     {
