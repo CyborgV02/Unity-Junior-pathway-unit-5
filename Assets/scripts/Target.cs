@@ -1,11 +1,12 @@
 using UnityEditor.Callbacks;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Target : MonoBehaviour
 {
     float minSpeed=12.0f;
     float maxSpeed=16.0f;
-    float Torque=5.0f;
+    float Torque=3.0f;
     float spawnRangeX=4.0f;
     float spawnPosY=-2.0f;
     private Rigidbody targetRB;
@@ -23,9 +24,11 @@ public class Target : MonoBehaviour
     }
     void OnMouseDown()
     {
+        if(gameManager.isGameActive){
         gameManager.updateScore(pointValue);
         Instantiate(explosionParticle,transform.position,explosionParticle.transform.rotation);
          Destroy(gameObject);
+        }
     }
     void Update()
     {
@@ -49,5 +52,11 @@ public class Target : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         Destroy(gameObject);
+
+        if (!gameObject.CompareTag("Bad"))
+        {
+            gameManager.isGameActive=false;
+            gameManager.gameOver();
+        }
     }
 }
