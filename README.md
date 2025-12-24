@@ -21,7 +21,7 @@ The player must click on falling crates before they reach the bottom of the scre
   - Easy
   - Medium
   - Hard  
-  Each difficulty increases falling speed and spawn rate
+  Each difficulty increases spawn rate
 
 - 🎯 **Score System**
   - Crates increase score
